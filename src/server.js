@@ -57,11 +57,32 @@ function pageLanding(req, res) {
 
 function pageStudy(req, res) {
     const filters = req.query
-    return res.render("study.html", { proffys, filters, subjects, weekdays })
+    return res.render("study.html", {
+        proffys,
+        filters,
+        subjects,
+        weekdays
+    })
 }
 
 function pageGiveClasses(req, res) {
-    return res.render("give-classes.html")
+    const data = req.query
+
+    // check if data is not empty
+    const isNotEmpty = Object.keys(data).length > 0;
+
+    if (isNotEmpty) {
+        // add data to the proffys list
+        proffys.push(data);
+
+        return res.redirect("/study");
+    } 
+
+    // if data is empty, show page
+    return res.render("give-classes.html", {
+        subjects,
+        weekdays
+    })
 }
 
 const express = require('express')
