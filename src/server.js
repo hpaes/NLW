@@ -6,11 +6,11 @@ const proffys = [
         whatsapp: "899232134",
         bio: "Entusiasta das melhores tecnologias de química avançada.<br><br>Apaixonado por explodir coisas em laboratório e por mudar a vida das pessoas através de experiências. Mais de 200.000 pessoas já passaram por uma das minhas explosões.",
         subject: "Química",
-        cost: "20" ,
+        cost: "20",
         weekday: [
             0
-        ] ,
-        time_from: [720] ,
+        ],
+        time_from: [720],
         time_to: [1220]
     },
     {
@@ -19,13 +19,36 @@ const proffys = [
         whatsapp: "8994123412",
         bio: "Instrutor de Educação Física para iniciantes, minha missão de vida é levar saúde e contribuir para o crescimento de quem se interessar.<br><br>Comecei a minha jornada profissional em 2001, quando meu pai me deu dois alteres de 32kg com a seguinte condição: \"Aprenda a fazer dinheiro com isso!\"",
         subject: "Educação Física",
-        cost: "40" ,
+        cost: "40",
         weekday: [
             0
-        ] ,
-        time_from: [720] ,
+        ],
+        time_from: [720],
         time_to: [1220]
     }
+]
+
+const subjects = [
+    "Artes",
+    "Biologia",
+    "Ciências",
+    "Educação física",
+    "Física",
+    "Geografia",
+    "História",
+    "Matemática",
+    "Português",
+    "Química",
+]
+
+const weekdays = [
+    "Domingo",
+    "Segunda-feira",
+    "Terça-feira",
+    "Quarta-feira",
+    "Quinta-feira",
+    "Sexta-feira",
+    "Sábado",
 ]
 
 function pageLanding(req, res) {
@@ -33,7 +56,8 @@ function pageLanding(req, res) {
 }
 
 function pageStudy(req, res) {
-    return res.render("study.html", { proffys: proffys})
+    const filters = req.query
+    return res.render("study.html", { proffys, filters, subjects, weekdays })
 }
 
 function pageGiveClasses(req, res) {
