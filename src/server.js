@@ -51,6 +51,14 @@ const weekdays = [
     "Sábado",
 ]
 
+// Functionalities
+
+// add subject name to page-study header
+function getSubject(subjectNumber) {
+    const arrayPosition = +subjectNumber - 1;
+    return subjects[arrayPosition];
+}
+
 function pageLanding(req, res) {
     return res.render("index.html")
 }
@@ -72,6 +80,8 @@ function pageGiveClasses(req, res) {
     const isNotEmpty = Object.keys(data).length > 0;
 
     if (isNotEmpty) {
+
+        data.subject = getSubject(data.subject);
         // add data to the proffys list
         proffys.push(data);
 
