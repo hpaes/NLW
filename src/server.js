@@ -29,15 +29,15 @@ const proffys = [
 ]
 
 function pageLanding(req, res) {
-    return res.sendFile(__dirname + "/views/index.html")
+    return res.render("index.html")
 }
 
 function pageStudy(req, res) {
-    return res.sendFile(__dirname + "/views/study.html")
+    return res.render("study.html", { proffys: proffys})
 }
 
 function pageGiveClasses(req, res) {
-    return res.sendFile(__dirname + "/views/give-classes.html")
+    return res.render("give-classes.html")
 }
 
 const express = require('express')
@@ -49,7 +49,6 @@ nunjucks.configure('src/views', {
     express: server,
     noCache: true,
 })
-
 
 server
 // config static files (css, scripts, images)
