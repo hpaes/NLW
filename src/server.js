@@ -86,7 +86,7 @@ function pageGiveClasses(req, res) {
         proffys.push(data);
 
         return res.redirect("/study");
-    } 
+    }
 
     // if data is empty, show page
     return res.render("give-classes.html", {
@@ -106,10 +106,10 @@ nunjucks.configure('src/views', {
 })
 
 server
-// config static files (css, scripts, images)
-.use(express.static("public"))
-// application paths
-.get("/", pageLanding)
-.get("/study", pageStudy)
-.get("/give-classes", pageGiveClasses)
-.listen(5500)
+    // config static files (css, scripts, images)
+    .use(express.static("public"))
+    // application paths
+    .get("/", pageLanding)
+    .get("/study", pageStudy)
+    .get("/give-classes", pageGiveClasses)
+    .listen(5500)
