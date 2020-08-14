@@ -61,29 +61,54 @@ async function pageStudy(req, res) {
 }
 
 function pageGiveClasses(req, res) {
-    const data = req.query
 
-    // check if data is not empty
-    const isNotEmpty = Object.keys(data).length > 0;
-
-    if (isNotEmpty) {
-
-        data.subject = getSubject(data.subject);
-        // add data to the proffys list
-        proffys.push(data);
-
-        return res.redirect("/study");
-    }
-
-    // if data is empty, show page
     return res.render("give-classes.html", {
         subjects,
         weekdays
     })
 }
 
-function saveClasses(req, res) {
-    
+async function saveClasses(req, res) {
+    const createProffy = require('./database/createProffy')
+
+    const proffyValue = {
+        name: req.body.name,
+        avatar: req.body.avatar,
+        whatsapp: req.body.whatsapp,
+        bio: req.body.bio
+    }
+
+    const classValue = {
+        subject: req.body.subject,
+        cost: req.body.cost
+    }
+
+    const classScheduleValues = req.body.weekday.map((weekday, index) => {
+
+        return {
+            weekday,
+            time_from: convertHoursToMinutes(req.body.time_from[index]),
+            time_to: convertHoursToMinutes(req.body.time_to[index])
+        }
+    })
+
+    try {
+        const db = await Database
+        await createProffy(db, {
+            proffyValue,
+            classValue,
+            classScheduleValues
+        })
+
+        let queryString = "?subject=" + req.body.subject
+        queryString += "&weekday=" + req.body.weekday[0]
+        queryString += "&time=" + req.body.time_from[0]
+
+        return res.redirect("/study" + queryString)
+
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 module.exports = {
