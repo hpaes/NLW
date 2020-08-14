@@ -23,8 +23,8 @@ const weekdays = [
 
 // add subject name to page-study header
 function getSubject(subjectNumber) {
-    const arrayPosition = +subjectNumber - 1;
-    return subjects[arrayPosition];
+    const arrayPosition = +subjectNumber - 1
+    return subjects[arrayPosition]
 }
 
 function convertHoursToMinutes(time) {
