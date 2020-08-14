@@ -7,8 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proffy | Sua plataforma de estudos online</title>
 
-    <link rel="shortcut icon" href="/images/favicon.png" type="image/png">
-
     <link rel="stylesheet" href="/styles/main.css" type="text/css">
     <link rel="stylesheet" href="/styles/partials/page-give-classes.css" type="text/css">
     <link rel="stylesheet" href="/styles/partials/header.css" type="text/css">
@@ -67,12 +65,13 @@
                     <div class="select-block">
                         <label for="subject">Matéria</label>
                         <select name="subject" id="subject" required>
-                            <option value="" disabled>Selecione uma opção</option>
+                            <option value="">Selecione uma opção</option>
 
                             {%for subject in subjects %}
-                            <option value="{{loop.index}}">{{subject}}</option>
+                                <option value="{{loop.index}}">
+                                    {{subject}}
+                                </option>
                             {%endfor%}
-
                         </select>
                     </div>
 
@@ -97,8 +96,9 @@
                                 <option value="">Selecione uma opção</option>
 
                                 {%for weekday in weekdays %}
-                                <option value="{{loop.index}}" {{ "selected if filters.weekday == loop.index"}}>{{weekday}}
-                                </option>
+                                    <option value="{{loop.index0}}" {{ "selected" if filters.weekday == loop.index}}>
+                                        {{weekday}}
+                                    </option>
                                 {%endfor%}
 
                             </select>
