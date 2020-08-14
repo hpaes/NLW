@@ -13,7 +13,7 @@ function pageLanding(req, res) {
 }
 
 async function pageStudy(req, res) {
-    const filters = req.body
+    const filters = req.query
 
     if (!filters.subject || !filters.weekday || !filters.time) {
 
@@ -47,6 +47,10 @@ async function pageStudy(req, res) {
     try {
         const db = await Database
         const proffys = await db.all(query)
+
+        proffys.map((proffy) => {
+            proffy.subject = getSubject(proffy.subject)
+        })
 
         return res.render('study.html', {
             proffys,
